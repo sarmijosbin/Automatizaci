@@ -1,3 +1,17 @@
+import { TimelineService } from 'wdio-timeline-reporter/timeline-service.js';
+const dateId = Date.now();
+const date = new Date(dateId);                              // Crear una instancia de Date con el timestamp
+ 
+// Obtener día, mes y año
+const day = String(date.getDate()).padStart(2, '0');        // Asegura que siempre sean 2 dígitos
+const month = String(date.getMonth() + 1).padStart(2, '0'); // Los meses empiezan en 0
+const year = date.getFullYear();
+const hours = date.getHours();
+const minutes = date.getMinutes();
+const seconds = date.getSeconds();
+ 
+// Formatear como dd/mm/aaaa
+const formattedDate = `${year}_${month}_${day}_${hours}_${minutes}_${seconds}`;
 export const config = {
     //
     // ====================
@@ -101,7 +115,7 @@ export const config = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     // services: [],
-    //
+    services: [[TimelineService]],
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks
@@ -123,7 +137,13 @@ export const config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec'],
+    reporters: [['timeline', {
+            outputDir: './reports',                                         //Carpeta de salida
+            fileName: `AutomatizationExercise_${formattedDate}.html`,          // Nombre del archivo HTML
+            embedImages: true,                                              // Incluir capturas de pantalla en el reporte
+            screenshotStrategy: 'on:error',                                 // Capturar pantallas en errores
+        }]
+    ],
 
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
