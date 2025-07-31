@@ -1,5 +1,7 @@
 import { $ } from '@wdio/globals'
 import { buyCartSelectors, dressSelectors, home, kidsCategorySelectors, menCategorySelectors, menuConstants, quantitySelectors, tshirtSelectors,} from '../../constants/menu.constants';
+import { generateProductQuantity } from './randomGenerator.page';
+// import randomGenerator from './randomGenerator.page.js';
 /**
  * sub page containing specific selectors and methods for a specific page
  */
@@ -48,7 +50,7 @@ class MenuPage {
     get homePage() {
         return $(home.homePage);
     }
-    get cartButton() {
+    get buttonCart() {
         return $(buyCartSelectors.cartButton);
     }
      // ===== MÉTODOS =====
@@ -75,49 +77,57 @@ class MenuPage {
    
     // ===== FUNCION ALEATORIA =====
 
-    generateRandomNumber(min,max) {
-        const number = Math.floor(Math.random() * (max - min + 1)) + min;
-        console.log(`Número aleatorio generado entre ${min} y ${max}: ${number}`);
-        return number;   
-    }
+    //generateRandomNumber(min,max) {
+    //    const number = Math.floor(Math.random() * (max - min + 1)) + min;
+    //    console.log(`Número aleatorio generado entre ${min} y ${max}: ${number}`);
+    //    return number;   
+    //}
     //====== METODOS ============
     
-    async processRandomQuantity() {
-        const cantidadAleatoria = this.generateRandomNumber(1, 5);
-        console.log(`Cantidad aleatoria generada: ${cantidadAleatoria}`);
+    async selectProductsRandom() {
+        // const quantityRandom = randomGenerator.generateProductQuantity();
+        const quantityRandom = generateProductQuantity()
+        console.log(`Cantidad aleatoria generada: ${quantityRandom}`);
 
         // Ingresa el campo de cantidad
         await this.quantityInput.clearValue(); // Limpia el campo de cantidad
-        await this.quantityInput.setValue(cantidadAleatoria); // Establece el valor aleatorio
-        console.log(`Cantidad establecida en el campo: ${cantidadAleatoria}`);
+        await this.quantityInput.setValue(quantityRandom); // Establece el valor aleatorio
+        console.log(`Cantidad establecida en el campo: ${quantityRandom}`);
 
         // Haz clic en el botón "Add to cart"
         await this.buttonAddToCart.click();
         await this.buttonContinueShopping.click();
         await browser.pause(1000);
 
-            if (cantidadAleatoria <= 3) {
-                console.log(`Cantidad ${cantidadAleatoria} <= 3, navegando a categoría Kids`);
+            if (quantityRandom <= 3) {
+                console.log(`Cantidad ${quantityRandom} <= 3, navegando a categoría Kids`);
                 await this.navigateKids();
             } else {
-                console.log(`Cantidad ${cantidadAleatoria} > 3, no se navega a Kids`);
+                console.log(`Cantidad ${quantityRandom} > 3, no se navega a Kids`);
                 await this.homePage.click();
             }
-            return cantidadAleatoria;
+            return quantityRandom;
     }   
     async navigateCart() {
-        await this.cartButton.click();
+        await this.buttonCart.click();
         await browser.pause(1000); 
     }
 
     // Método para generar correo usando la misma utilidad
-    generarCorreoAleatorio() {
-    // Usar la misma función para el correo (300-320)
-    const numeroAleatorio = this.generateRandomNumber(300, 400);
-    const correo = `pruebaAtpbi${numeroAleatorio}@prueba.com`;
-    console.log(`Correo generado: ${correo}`);
-    return correo;
-    }
+    //generarCorreoAleatorio() {
+    //const numeroAleatorio = this.generateRandomNumber(300, 400);
+    //const correo = `pruebaAtpbi${numeroAleatorio}@prueba.com`;
+    //console.log(`Correo generado: ${correo}`);
+    //return correo;
+    //}
+    // generateRandomEmail() {
+    //     // Usar función de utilidad con parámetros por defecto (300-400)
+    //     return randomGenerator.generateRandomEmail(); // Era: generarCorreoAleatorio()
+    // }
+
+    // generateRegistrationEmail() {
+    //     return randomGenerator.generateRegistrationEmail(); // Para registro (100-120)
+    // }
 }
 
 export default new MenuPage();  

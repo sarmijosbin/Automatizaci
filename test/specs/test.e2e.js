@@ -26,8 +26,8 @@ describe('Navigation Tests', () => {
         // Ingresa una cantidad aleatoria de productos
         await browser.saveScreenshot('./screenshots/product-selected.png');
 
-        const cantidadUsada = await menuPage.processRandomQuantity();
-        console.log(`Cantidad procesada: ${cantidadUsada}`);
+        const quantityUsed = menuPage.selectProductsRandom();
+        console.log(`Cantidad procesada: ${quantityUsed}`);
         await browser.pause(3000);
         
         // Navega en el carrito de compras
@@ -35,9 +35,9 @@ describe('Navigation Tests', () => {
         await browser.pause(2000);
 
         //Procesar checkout con correo aleatorio
-        const datosUsuario = await checkoutPage.proceedCheckoutFlow();
-        console.log(`Usuario registrado: ${datosUsuario.usuario}`);
-        console.log(`Correo usado: ${datosUsuario.correo}`);
+        const dataUser = await checkoutPage.proceedCheckoutFlow();
+        console.log(`Usuario registrado: ${dataUser.user}`);
+        console.log(`Correo usado: ${dataUser.email}`);
         await browser.pause(2000);
         
         // Completa el formulario de checkout

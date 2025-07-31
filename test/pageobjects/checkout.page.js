@@ -1,7 +1,7 @@
 import { $ } from '@wdio/globals'
 import { checkoutSelectors, proceedCheckout,registerLogin} from '../../constants/checkout.constants.js';
-import menuPage from './menu.page.js';
 import verifyPage from './verify.page.js';
+import { generateRandomEmail } from './randomGenerator.page.js';
 
 class checkoutPage {
 
@@ -90,14 +90,14 @@ class checkoutPage {
                 await browser.pause(1000);
         
                 // Usar la utilidad compartida para generar correo
-                const correoAleatorio = menuPage.generarCorreoAleatorio();
+                const emailRandom = generateRandomEmail();
 
                 await this.usernameLogin.setValue('Sindy Armijos');
-                await this.emailaddressLogin.setValue(correoAleatorio);
+                await this.emailaddressLogin.setValue(emailRandom);
                 await this.signupLogin.click();
                 await browser.pause(2000);
 
-                return { usuario: 'Sindy Armijos', correo: correoAleatorio };
+                return { user: 'Sindy Armijos', email: emailRandom };
         }
 
         async fillCheckoutForm() {
