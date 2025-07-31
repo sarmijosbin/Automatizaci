@@ -4,41 +4,40 @@ import { verifyAccountCreatedSelectors, verifyAddressSelectors, verifyCartSelect
 class verifyPage {
 
     get homeConfirmationMessage() {
-    return $(verifyHomeSelectors.mainLogo);
+        return $(verifyHomeSelectors.mainLogo);
     }
 
     get accountCreatedConfirmation() {
-    return $(verifyAccountCreatedSelectors.accountCreatedConfirmation);
+        return $(verifyAccountCreatedSelectors.accountCreatedConfirmation);
     }
 
     get CartShopConfirmation() {
-    return $(verifyCartSelectors.cartConfirmationMessage);
+        return $(verifyCartSelectors.cartConfirmationMessage);
     }
 
     get LoggedUsrConfirmation() {
-    return $(verifyLoggedSelectors.loggedUsrConfirmation);
+        return $(verifyLoggedSelectors.loggedUsrConfirmation);
     }
 
     get addressDetailsConfirmation() {
-    return $(verifyAddressSelectors.addressDetailsConfirmation);
+        return $(verifyAddressSelectors.addressDetailsConfirmation);
     }
 
     get reviewDetailsConfirmation() {
-    return $(verifyReviewOrderSelectors.reviewOrderConfirmation);
+        return $(verifyReviewOrderSelectors.reviewOrderConfirmation);
     }
 
     get congratulationsOrderConfirmation() {
-    return $(verifyCongratulationsOrderSelectors.congratulationsOrderMessage);
+        return $(verifyCongratulationsOrderSelectors.congratulationsOrderMessage);
     }
 
     get deletedOrderConfirmation() {
-    return $(verifyDeletedAccountSelectors.deletedAccountMessage);
+        return $(verifyDeletedAccountSelectors.deletedAccountMessage);
     }
 
     async verifyHomePage() {
         if (await this.homeConfirmationMessage.isDisplayed()) {
-            await browser.pause(2000);
-            //await this.continueButton.click();
+            await browser.saveScreenshot('./screenshots/home-page.png');
 
         }else {
             throw new Error('Confirmation message not displayed');
@@ -48,8 +47,7 @@ class verifyPage {
 
     async verifyAccountCreated() {
         if (await this.accountCreatedConfirmation.isDisplayed()) {
-            await browser.pause(2000);
-           // await this.continueButton.click();
+            await browser.saveScreenshot('./screenshots/account-created.png');
 
         }else {
             throw new Error('Confirmation message not displayed');
@@ -58,8 +56,7 @@ class verifyPage {
     }
     async verifyCartShop(){
         if (await this.CartShopConfirmation.isDisplayed()) {
-            await browser.pause(2000);
-            //await this.continueButton.click();
+            await browser.saveScreenshot('./screenshots/cart-shop.png');
 
         }else {
             throw new Error('Confirmation message not displayed');
@@ -68,8 +65,7 @@ class verifyPage {
 
     async verifyLoggedUsrConfirmation(){
         if (await this.LoggedUsrConfirmation.isDisplayed()) {
-            await browser.pause(2000);
-            //await this.continueButton.click();
+            await browser.saveScreenshot('./screenshots/logged-user.png');
 
         }else {
             throw new Error('Confirmation message not displayed');
@@ -78,8 +74,7 @@ class verifyPage {
     
     async verifyaddressDetailsConfirmation(){
         if (await this.addressDetailsConfirmation.isDisplayed()) {
-            await browser.pause(2000);
-            //await this.continueButton.click();
+            await browser.saveScreenshot('./screenshots/address-details.png');
 
         }else {
             throw new Error('Confirmation message not displayed');
@@ -88,8 +83,7 @@ class verifyPage {
 
     async verifyReviewOrderConfirmation(){
         if (await this.reviewDetailsConfirmation.isDisplayed()) {
-            await browser.pause(2000);
-            //await this.continueButton.click();
+            await browser.saveScreenshot('./screenshots/review-order.png');
 
         }else {
             throw new Error('Confirmation message not displayed');
@@ -98,8 +92,7 @@ class verifyPage {
 
     async verifyCongratulationsOrderConfirmation(){
         if (await this.congratulationsOrderConfirmation.isDisplayed()) {
-            await browser.pause(2000);
-            //await this.continueButton.click();
+            await browser.saveScreenshot('./screenshots/congratulations-order.png');
 
         }else {
             throw new Error('Confirmation message not displayed');
@@ -108,8 +101,7 @@ class verifyPage {
 
     async verifyDeletedOrderConfirmation(){
         if (await this.deletedOrderConfirmation.isDisplayed()) {
-            await browser.pause(2000);
-            //await this.continueButton.click();
+            await browser.saveScreenshot('./screenshots/deleted-account.png');
 
         }else {
             throw new Error('Confirmation message not displayed');

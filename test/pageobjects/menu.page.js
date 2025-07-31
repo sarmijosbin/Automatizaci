@@ -13,7 +13,8 @@ class MenuPage {
     get selectCategoryKids () {
         return $(menuConstants.category.kids);
     }
-// ===== SUBCATEGORÍAS DE HOMBRES =====
+    //===== SUBCATEGORÍAS DE HOMBRES =====
+
     get selectTshirtMen() {
         return $(menCategorySelectors.tshirts);
     }
@@ -32,7 +33,7 @@ class MenuPage {
         return $(kidsCategorySelectors.topsShirts);
     }
     get dressSelectorsProduct() {
-    return $(dressSelectors.dressProduct); 
+        return $(dressSelectors.dressProduct); 
     }  
 
     get quantityInput() {
@@ -54,75 +55,59 @@ class MenuPage {
 
     async navigateMen() {
         await this.selectCategoryMen.click();
-        await browser.pause(2000); 
-        //await this.selectTshirtMen.click();
-        //await browser.pause(2000); 
-     }
-     async selectProductMen() {
+    }
+
+    async selectProductMen() {
         // Navegar: Tshirts → Producto específico
         await this.selectTshirtMen.click();
-        await browser.pause(2000);
         await this.tshirtSelectorsProduct.click();
-        await browser.pause(2000); 
-     }
+    }
 
     async navigateKids() {
         // Abrir Kids y seleccionar subcategoría
         await this.selectCategoryKids.click();
-        await browser.pause(2000); 
         await this.selectDressKids.click();          // O selectTopsKids
-        await browser.pause(2000);
         await this.dressSelectorsProduct.click();
-        await browser.pause(2000);
         await this.buttonAddToCart.click();
-        await browser.pause(2000);
         await this.buttonContinueShopping.click();
-        await browser.pause(2000);
         await this.homePage.click();
-        await browser.pause(2000);
     }
-        //await browser.saveScreenshot('./screenshots/primerProducto.png');
    
-
     // ===== FUNCION ALEATORIA =====
 
     generateRandomNumber(min,max) {
-    const numero = Math.floor(Math.random() * (max - min + 1)) + min;
-    console.log(`Número aleatorio generado entre ${min} y ${max}: ${numero}`);
-    return numero;   
+        const number = Math.floor(Math.random() * (max - min + 1)) + min;
+        console.log(`Número aleatorio generado entre ${min} y ${max}: ${number}`);
+        return number;   
     }
     //====== METODOS ============
     
     async processRandomQuantity() {
-    const cantidadAleatoria = this.generateRandomNumber(1, 5);
-    console.log(`Cantidad aleatoria generada: ${cantidadAleatoria}`);
+        const cantidadAleatoria = this.generateRandomNumber(1, 5);
+        console.log(`Cantidad aleatoria generada: ${cantidadAleatoria}`);
 
+        // Ingresa el campo de cantidad
+        await this.quantityInput.clearValue(); // Limpia el campo de cantidad
+        await this.quantityInput.setValue(cantidadAleatoria); // Establece el valor aleatorio
+        console.log(`Cantidad establecida en el campo: ${cantidadAleatoria}`);
 
-    // Ingresa el campo de cantidad
-    await this.quantityInput.clearValue(); // Limpia el campo de cantidad
-    await this.quantityInput.setValue(cantidadAleatoria); // Establece el valor aleatorio
-    console.log(`Cantidad establecida en el campo: ${cantidadAleatoria}`);
-    await browser.pause(2000);
+        // Haz clic en el botón "Add to cart"
+        await this.buttonAddToCart.click();
+        await this.buttonContinueShopping.click();
+        await browser.pause(1000);
 
-    // Haz clic en el botón "Add to cart"
-    await this.buttonAddToCart.click();
-    await browser.pause(2000);
-    await this.buttonContinueShopping.click();
-    await browser.pause(2000);
-
-    if (cantidadAleatoria <= 3) {
-        console.log(`Cantidad ${cantidadAleatoria} <= 3, navegando a categoría Kids`);
-        await this.navigateKids();
-    } else {
-        console.log(`Cantidad ${cantidadAleatoria} > 3, no se navega a Kids`);
-        await this.homePage.click();
-        await browser.pause(2000);
-    }
-     return cantidadAleatoria;
+            if (cantidadAleatoria <= 3) {
+                console.log(`Cantidad ${cantidadAleatoria} <= 3, navegando a categoría Kids`);
+                await this.navigateKids();
+            } else {
+                console.log(`Cantidad ${cantidadAleatoria} > 3, no se navega a Kids`);
+                await this.homePage.click();
+            }
+            return cantidadAleatoria;
     }   
     async navigateCart() {
         await this.cartButton.click();
-        await browser.pause(2000); // Pausa para esperar que la página cargue
+        await browser.pause(1000); 
     }
 
     // Método para generar correo usando la misma utilidad

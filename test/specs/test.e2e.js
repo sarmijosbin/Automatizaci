@@ -33,7 +33,6 @@ describe('Navigation Tests', () => {
         // Navega en el carrito de compras
         await menuPage.navigateCart(); 
         await browser.pause(2000);
-        await browser.saveScreenshot('./screenshots/cart-opened.png');
 
         //Procesar checkout con correo aleatorio
         const datosUsuario = await checkoutPage.proceedCheckoutFlow();
@@ -43,8 +42,7 @@ describe('Navigation Tests', () => {
         
         // Completa el formulario de checkout
         await checkoutPage.fillCheckoutForm();
-        console.log('Formulario de checkout completado');
-        await browser.saveScreenshot('./screenshots/test-completed.png');   
+        console.log('Formulario de checkout completado');  
         await browser.pause(2000);
 
         // Navega para realizar el pedido
