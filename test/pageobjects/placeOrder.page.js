@@ -1,8 +1,9 @@
 import { $ } from '@wdio/globals'
-import menuPage from './menu.page.js';
+//import menuPage from './menu.page.js';
 import checkoutPage from './checkout.page.js';
 import { placeOrderSelectors } from '../../constants/placeOrder.constants.js';
 import verifyPage from './verify.page.js';
+import menuPage from './menu.page.js';
 
 class placeOrderPage {
 
@@ -33,7 +34,7 @@ class placeOrderPage {
 
     async placeOrderCart() {
         // Navegar al carrito de compras
-        await menuPage.cartButton.click();
+        await menuPage.buttonCart.click();
         // Verificar que la página del carrito se cargue
         await verifyPage.verifyCartShop();
         await browser.pause(1000);
